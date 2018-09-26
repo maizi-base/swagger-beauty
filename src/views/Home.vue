@@ -1,18 +1,31 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="main home">
+    <h2>api列表</h2>
+    <ul>
+      <li v-for="item in apiDoc.tags">
+        <router-link :to="{ path: '/details/'+item.name}">{{item.name}}</router-link>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
   name: 'home',
   components: {
-    HelloWorld
-  }
+
+  },
+  computed:{
+    apiDoc(){
+      return this.$store.state.apiDoc
+    }
+  },
+  created() {
+
+  },
 }
 </script>
+<style lang="less">
+
+</style>
+

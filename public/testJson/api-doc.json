@@ -1,0 +1,3122 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "注意：header 里加token字段用来认证",
+        "version": "版本号:0.0.1",
+        "title": "任务分发平台接口文档",
+        "contact": {
+            "name": "测试"
+        }
+    },
+    "host": "songshipeng.s1.natapp.cc",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "user-controller",
+            "description": "User Controller"
+        },
+        {
+            "name": "二维码Croller",
+            "description": "Qr Controller"
+        },
+        {
+            "name": "任务信息Controller",
+            "description": "Taskinfo Rest Controller"
+        },
+        {
+            "name": "微信公众号登录",
+            "description": "Wx MP User Controller"
+        },
+        {
+            "name": "微信小程序登录",
+            "description": "Wx Ma User Controller"
+        },
+        {
+            "name": "微信用户",
+            "description": "Wechat User Controller"
+        },
+        {
+            "name": "提现记录Controller",
+            "description": "Withdraw Rest Controller"
+        },
+        {
+            "name": "支付接口",
+            "description": "Pay Controller"
+        },
+        {
+            "name": "文件Croller",
+            "description": "File Controller"
+        },
+        {
+            "name": "用户任务关联",
+            "description": "Usertask Rest Controller"
+        },
+        {
+            "name": "登陆相关服务",
+            "description": "Login Controller"
+        },
+        {
+            "name": "福利播报",
+            "description": "Fuliinfo Rest Controller"
+        },
+        {
+            "name": "类型信息",
+            "description": "Typeinfo Rest Controller"
+        },
+        {
+            "name": "达人榜",
+            "description": "Darenbang Rest Controller"
+        }
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "登陆相关服务"
+                ],
+                "summary": "rest登陆",
+                "operationId": "ajaxLoginUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "用户名密码",
+                        "description": "格式：{\"loginName\":\"admin\",\"password\":\"admin123\"}",
+                        "required": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数«string»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/notifyPay": {
+            "post": {
+                "tags": [
+                    "支付接口"
+                ],
+                "summary": "通知结果接口,用来接收支付结果",
+                "operationId": "notifyPayUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "paySaPi",
+                        "description": "paySaPi",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PaySaPi"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/darenbang/delete/{id}": {
+            "get": {
+                "tags": [
+                    "达人榜"
+                ],
+                "summary": "删除",
+                "operationId": "deleteUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/darenbang/detail/{id}": {
+            "get": {
+                "tags": [
+                    "达人榜"
+                ],
+                "summary": "详情",
+                "operationId": "detailUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/darenbang/getDarenBang": {
+            "post": {
+                "tags": [
+                    "达人榜"
+                ],
+                "summary": "查询",
+                "operationId": "getDarenBangUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "paraMap",
+                        "description": "周期默认不用填，若想填，格式为201906取得当前周期",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/实体类DarenbangVo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/darenbang/save": {
+            "post": {
+                "tags": [
+                    "达人榜"
+                ],
+                "summary": "保存",
+                "operationId": "saveUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sortParam",
+                        "in": "query",
+                        "description": "查询用：排序字段，降序排列，默认主键",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sortType",
+                        "in": "query",
+                        "description": "查询用：排序方式，desc or asc，默认desc",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "startRow",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageNum",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "ID",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "darenType",
+                        "in": "query",
+                        "description": "达人类型0:接单数量，1发单数量，2金额",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "userWX",
+                        "in": "query",
+                        "description": "用户微信",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "userId",
+                        "in": "query",
+                        "description": "用户id",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "darenState",
+                        "in": "query",
+                        "description": "状态",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "position",
+                        "in": "query",
+                        "description": "排名",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "period",
+                        "in": "query",
+                        "description": "统计范围",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "numOrPrice",
+                        "in": "query",
+                        "description": "接单的数量或者接单金额，与类型相关",
+                        "required": false,
+                        "type": "number",
+                        "format": "double"
+                    },
+                    {
+                        "name": "bonus",
+                        "in": "query",
+                        "description": "奖金",
+                        "required": false,
+                        "type": "number",
+                        "format": "double"
+                    },
+                    {
+                        "name": "imageUrl",
+                        "in": "query",
+                        "description": "头像",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "userName",
+                        "in": "query",
+                        "description": "用户名",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/fuliinfo/delete/{id}": {
+            "get": {
+                "tags": [
+                    "福利播报"
+                ],
+                "summary": "删除",
+                "operationId": "deleteUsingGET_1",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/fuliinfo/detail/{id}": {
+            "get": {
+                "tags": [
+                    "福利播报"
+                ],
+                "summary": "详情",
+                "operationId": "detailUsingGET_1",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/fuliinfo/list": {
+            "post": {
+                "tags": [
+                    "福利播报"
+                ],
+                "summary": "不分页查询",
+                "operationId": "listUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "paraMap",
+                        "description": "paraMap",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/实体类FuliinfoVo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/fuliinfo/pageSearch": {
+            "post": {
+                "tags": [
+                    "福利播报"
+                ],
+                "summary": "分页查询",
+                "operationId": "pageSearchUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "paraMap",
+                        "description": "paraMap",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/实体类FuliinfoVo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/fuliinfo/save": {
+            "post": {
+                "tags": [
+                    "福利播报"
+                ],
+                "summary": "保存",
+                "operationId": "saveUsingPOST_1",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "fuliinfo",
+                        "description": "fuliinfo",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/实体类FuliinfoVo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/myInfo": {
+            "get": {
+                "tags": [
+                    "登陆相关服务"
+                ],
+                "summary": "个人信息",
+                "operationId": "myInfoUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/pay": {
+            "get": {
+                "tags": [
+                    "支付接口"
+                ],
+                "summary": "支付操作,获取返回参数后，再调用支付接口",
+                "operationId": "payUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "price",
+                        "in": "query",
+                        "description": "支付金额",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "istype",
+                        "in": "query",
+                        "description": "支付类型，1：支付宝；2：微信支付",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "returnUrl",
+                        "in": "query",
+                        "description": "跳转url",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数«object»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/pay/freshResult": {
+            "get": {
+                "tags": [
+                    "支付接口"
+                ],
+                "summary": "刷新支付结果",
+                "operationId": "freshResultUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "taskId",
+                        "description": "任务id",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数«任务实体类TaskinfoVo»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/qrCode": {
+            "get": {
+                "tags": [
+                    "二维码Croller"
+                ],
+                "summary": "生成我的二维码",
+                "operationId": "getQrUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "qrRrl",
+                        "in": "query",
+                        "description": "要生成的url",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/taskinfo/delete/{id}": {
+            "get": {
+                "tags": [
+                    "任务信息Controller"
+                ],
+                "summary": "删除",
+                "operationId": "deleteUsingGET_2",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/taskinfo/detail/{id}": {
+            "get": {
+                "tags": [
+                    "任务信息Controller"
+                ],
+                "summary": "详情",
+                "operationId": "detailUsingGET_2",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/taskinfo/list": {
+            "post": {
+                "tags": [
+                    "任务信息Controller"
+                ],
+                "summary": "查询",
+                "operationId": "listUsingPOST_1",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "paraMap",
+                        "description": "paraMap",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/任务实体类TaskinfoVo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/taskinfo/listOwm": {
+            "post": {
+                "tags": [
+                    "任务信息Controller"
+                ],
+                "summary": "查询自己的",
+                "operationId": "listOwmUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "paraMap",
+                        "description": "paraMap",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/任务实体类TaskinfoVo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/taskinfo/save": {
+            "post": {
+                "tags": [
+                    "任务信息Controller"
+                ],
+                "summary": "保存",
+                "operationId": "saveUsingPOST_2",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "taskinfo",
+                        "description": "taskinfo",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/任务实体类TaskinfoVo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/testUse": {
+            "post": {
+                "tags": [
+                    "文件Croller"
+                ],
+                "summary": "测试",
+                "operationId": "testUseUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/typeinfo/delete/{id}": {
+            "get": {
+                "tags": [
+                    "类型信息"
+                ],
+                "summary": "删除",
+                "operationId": "deleteUsingGET_3",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/typeinfo/detail/{id}": {
+            "get": {
+                "tags": [
+                    "类型信息"
+                ],
+                "summary": "详情",
+                "operationId": "detailUsingGET_3",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/typeinfo/list": {
+            "post": {
+                "tags": [
+                    "类型信息"
+                ],
+                "summary": "查询",
+                "operationId": "listUsingPOST_2",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "paraMap",
+                        "description": "paraMap",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/返回实体类TypeinfoVo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/typeinfo/save": {
+            "post": {
+                "tags": [
+                    "类型信息"
+                ],
+                "summary": "保存",
+                "operationId": "saveUsingPOST_3",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sortParam",
+                        "in": "query",
+                        "description": "查询用：排序字段，降序排列，默认主键",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sortType",
+                        "in": "query",
+                        "description": "查询用：排序方式，desc or asc，默认desc",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "startRow",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageNum",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "ID",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "typeName",
+                        "in": "query",
+                        "description": "类型名称",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "minNum",
+                        "in": "query",
+                        "description": "最小数量",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "minPrice",
+                        "in": "query",
+                        "description": "最低金额",
+                        "required": false,
+                        "type": "number"
+                    },
+                    {
+                        "name": "rate",
+                        "in": "query",
+                        "description": "费率",
+                        "required": false,
+                        "type": "number",
+                        "format": "float"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/uploadFile": {
+            "post": {
+                "tags": [
+                    "文件Croller"
+                ],
+                "summary": "保存文件",
+                "operationId": "uploadFileUsingPOST",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "uploadFile",
+                        "in": "formData",
+                        "description": "uploadFile",
+                        "required": false,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/usertask/delete/{id}": {
+            "get": {
+                "tags": [
+                    "用户任务关联"
+                ],
+                "summary": "删除",
+                "operationId": "deleteUsingGET_4",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/usertask/detail/{id}": {
+            "get": {
+                "tags": [
+                    "用户任务关联"
+                ],
+                "summary": "详情",
+                "operationId": "detailUsingGET_4",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/usertask/list": {
+            "post": {
+                "tags": [
+                    "用户任务关联"
+                ],
+                "summary": "查询",
+                "operationId": "listUsingPOST_3",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "paraMap",
+                        "description": "paraMap",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/返回实体类UsertaskVo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/usertask/listOwn": {
+            "post": {
+                "tags": [
+                    "用户任务关联"
+                ],
+                "summary": "查询-只查询本人的",
+                "operationId": "listOwnUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "paraMap",
+                        "description": "paraMap",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/返回实体类UsertaskVo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/usertask/save": {
+            "post": {
+                "tags": [
+                    "用户任务关联"
+                ],
+                "summary": "保存",
+                "operationId": "saveUsingPOST_4",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "usertask",
+                        "description": "usertask",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/返回实体类UsertaskVo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/usertask/update": {
+            "post": {
+                "tags": [
+                    "用户任务关联"
+                ],
+                "summary": "更新",
+                "operationId": "updateUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "usertask",
+                        "description": "usertask",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/返回实体类UsertaskVo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/wechatUser/myTeam": {
+            "get": {
+                "tags": [
+                    "微信用户"
+                ],
+                "summary": "我的团队",
+                "operationId": "myTeamUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/withdraw/delete/{id}": {
+            "get": {
+                "tags": [
+                    "提现记录Controller"
+                ],
+                "summary": "删除",
+                "operationId": "deleteUsingGET_5",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/withdraw/detail/{id}": {
+            "get": {
+                "tags": [
+                    "提现记录Controller"
+                ],
+                "summary": "详情",
+                "operationId": "detailUsingGET_5",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/withdraw/list": {
+            "post": {
+                "tags": [
+                    "提现记录Controller"
+                ],
+                "summary": "查询",
+                "operationId": "listUsingPOST_4",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "paraMap",
+                        "description": "paraMap",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/返回实体类WithdrawVo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/server/withdraw/save": {
+            "post": {
+                "tags": [
+                    "提现记录Controller"
+                ],
+                "summary": "保存",
+                "operationId": "saveUsingPOST_5",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sortParam",
+                        "in": "query",
+                        "description": "查询用：排序字段，降序排列，默认主键",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sortType",
+                        "in": "query",
+                        "description": "查询用：排序方式，desc or asc，默认desc",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "startRow",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "pageNum",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "ID",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "amount",
+                        "in": "query",
+                        "description": "申请金额",
+                        "required": false,
+                        "type": "number"
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "description": "状态。0：申请中，1提现成功，2提现失败",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "creatTime",
+                        "in": "query",
+                        "description": "申请时间",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "updateTime",
+                        "in": "query",
+                        "description": "更新时间",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/user/save": {
+            "post": {
+                "tags": [
+                    "user-controller"
+                ],
+                "summary": "save用户",
+                "operationId": "addUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "user",
+                        "description": "user",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/用户实体"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数«string»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/wechat/miniapp/user/login": {
+            "get": {
+                "tags": [
+                    "微信小程序登录"
+                ],
+                "summary": "登陆",
+                "description": "返回本项目token值,之后操作，都应该带着token值",
+                "operationId": "loginUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "code",
+                        "in": "query",
+                        "description": "code",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/wechat/miniapp/user/phone": {
+            "get": {
+                "tags": [
+                    "微信小程序登录"
+                ],
+                "summary": "绑定手机号信息",
+                "operationId": "phoneUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "signature",
+                        "in": "query",
+                        "description": "signature",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "rawData",
+                        "in": "query",
+                        "description": "rawData",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "encryptedData",
+                        "in": "query",
+                        "description": "encryptedData",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iv",
+                        "in": "query",
+                        "description": "iv",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "token",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/wechat/miniapp/user/upInfo": {
+            "get": {
+                "tags": [
+                    "微信小程序登录"
+                ],
+                "summary": "更新用户信息",
+                "operationId": "upInfoUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "signature",
+                        "in": "query",
+                        "description": "signature",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "rawData",
+                        "in": "query",
+                        "description": "rawData",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "encryptedData",
+                        "in": "query",
+                        "description": "encryptedData",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iv",
+                        "in": "query",
+                        "description": "iv",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "token",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数«string»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/wechat/miniapp/user/userInfo": {
+            "get": {
+                "tags": [
+                    "微信小程序登录"
+                ],
+                "summary": "获取当前用户信息",
+                "operationId": "userInfoUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/wechat/mp/user/login": {
+            "get": {
+                "tags": [
+                    "微信公众号登录"
+                ],
+                "summary": "登陆",
+                "description": "返回本项目token值,之后操作，都应该带着token值",
+                "operationId": "loginUsingGET_1",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "令牌",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "code",
+                        "in": "query",
+                        "description": "code",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pid",
+                        "in": "query",
+                        "description": "pid",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/返回参数"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Meta": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "description": "描述信息",
+                    "allowEmptyValue": false
+                },
+                "success": {
+                    "type": "boolean",
+                    "example": false,
+                    "description": "成功标识；true：成功；false:失败",
+                    "allowEmptyValue": false
+                },
+                "totalItem": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "如果是列表，查询结果总数",
+                    "allowEmptyValue": false
+                }
+            },
+            "title": "Meta"
+        },
+        "PaySaPi": {
+            "type": "object",
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "orderid": {
+                    "type": "string"
+                },
+                "orderuid": {
+                    "type": "string"
+                },
+                "paysapi_id": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "string"
+                },
+                "realprice": {
+                    "type": "string"
+                }
+            },
+            "title": "PaySaPi"
+        },
+        "任务实体类TaskinfoVo": {
+            "type": "object",
+            "properties": {
+                "createtime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "createtime",
+                    "allowEmptyValue": false
+                },
+                "deadline": {
+                    "type": "string",
+                    "description": "截止时间",
+                    "allowEmptyValue": false
+                },
+                "finishinum": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "完成数量",
+                    "allowEmptyValue": false
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "ID",
+                    "allowEmptyValue": false
+                },
+                "locknum": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "锁定的数量",
+                    "allowEmptyValue": false
+                },
+                "neturl": {
+                    "type": "string",
+                    "description": "网址链接",
+                    "allowEmptyValue": false
+                },
+                "opexplain": {
+                    "type": "string",
+                    "description": "操作说明",
+                    "allowEmptyValue": false
+                },
+                "pageNum": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "pageSize": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "remark": {
+                    "type": "string",
+                    "description": "remark",
+                    "allowEmptyValue": false
+                },
+                "servicecharge": {
+                    "type": "number",
+                    "description": "服务费",
+                    "allowEmptyValue": false
+                },
+                "sortParam": {
+                    "type": "string",
+                    "description": "查询用：排序字段，降序排列，默认主键",
+                    "allowEmptyValue": false
+                },
+                "sortType": {
+                    "type": "string",
+                    "description": "查询用：排序方式，desc or asc，默认desc",
+                    "allowEmptyValue": false
+                },
+                "startRow": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "state": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "状态.0:等待支付，1:支付成功，2：付款未完成，3：审核成功",
+                    "allowEmptyValue": false
+                },
+                "sumprice": {
+                    "type": "number",
+                    "description": "合计",
+                    "allowEmptyValue": false
+                },
+                "tasknum": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "任务数量",
+                    "allowEmptyValue": false
+                },
+                "title": {
+                    "type": "string",
+                    "description": "标题",
+                    "allowEmptyValue": false
+                },
+                "type": {
+                    "type": "string",
+                    "description": "种类",
+                    "allowEmptyValue": false
+                },
+                "unitprice": {
+                    "type": "number",
+                    "description": "单价",
+                    "allowEmptyValue": false
+                },
+                "updatetime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "updatetime",
+                    "allowEmptyValue": false
+                },
+                "userid": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "用户id",
+                    "allowEmptyValue": false
+                },
+                "verifyimage": {
+                    "type": "string",
+                    "description": "验证图片url",
+                    "allowEmptyValue": false
+                },
+                "verifyliteral": {
+                    "type": "string",
+                    "description": "文字验证",
+                    "allowEmptyValue": false
+                },
+                "wechatnum": {
+                    "type": "string",
+                    "description": "公众号",
+                    "allowEmptyValue": false
+                }
+            },
+            "title": "任务实体类TaskinfoVo"
+        },
+        "实体类DarenbangVo": {
+            "type": "object",
+            "properties": {
+                "bonus": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "奖金",
+                    "allowEmptyValue": false
+                },
+                "darenState": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "状态",
+                    "allowEmptyValue": false
+                },
+                "darenType": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "达人类型0:接单数量，1发单数量，2金额",
+                    "allowEmptyValue": false
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "ID",
+                    "allowEmptyValue": false
+                },
+                "imageUrl": {
+                    "type": "string",
+                    "description": "头像",
+                    "allowEmptyValue": false
+                },
+                "numOrPrice": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "接单的数量或者接单金额，与类型相关",
+                    "allowEmptyValue": false
+                },
+                "pageNum": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "pageSize": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "period": {
+                    "type": "string",
+                    "description": "统计范围",
+                    "allowEmptyValue": false
+                },
+                "position": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "排名",
+                    "allowEmptyValue": false
+                },
+                "sortParam": {
+                    "type": "string",
+                    "description": "查询用：排序字段，降序排列，默认主键",
+                    "allowEmptyValue": false
+                },
+                "sortType": {
+                    "type": "string",
+                    "description": "查询用：排序方式，desc or asc，默认desc",
+                    "allowEmptyValue": false
+                },
+                "startRow": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "userId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "用户id",
+                    "allowEmptyValue": false
+                },
+                "userName": {
+                    "type": "string",
+                    "description": "用户名",
+                    "allowEmptyValue": false
+                },
+                "userWX": {
+                    "type": "string",
+                    "description": "用户微信",
+                    "allowEmptyValue": false
+                }
+            },
+            "title": "实体类DarenbangVo"
+        },
+        "实体类FuliinfoVo": {
+            "type": "object",
+            "properties": {
+                "agreeNum": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "点赞数量",
+                    "allowEmptyValue": false
+                },
+                "discussNum": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "评论数量",
+                    "allowEmptyValue": false
+                },
+                "fuliContent": {
+                    "type": "string",
+                    "description": "内容",
+                    "allowEmptyValue": false
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "ID",
+                    "allowEmptyValue": false
+                },
+                "infoOne": {
+                    "type": "string",
+                    "description": "备用字段",
+                    "allowEmptyValue": false
+                },
+                "pageNum": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "pageSize": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "retransmissionNum": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "转发数量",
+                    "allowEmptyValue": false
+                },
+                "sortParam": {
+                    "type": "string",
+                    "description": "查询用：排序字段，降序排列，默认主键",
+                    "allowEmptyValue": false
+                },
+                "sortType": {
+                    "type": "string",
+                    "description": "查询用：排序方式，desc or asc，默认desc",
+                    "allowEmptyValue": false
+                },
+                "startRow": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "userId": {
+                    "type": "string",
+                    "description": "用户id",
+                    "allowEmptyValue": false
+                }
+            },
+            "title": "实体类FuliinfoVo"
+        },
+        "用户实体": {
+            "type": "object",
+            "properties": {
+                "admin": {
+                    "type": "boolean"
+                },
+                "avatar": {
+                    "type": "string",
+                    "description": "头像",
+                    "allowEmptyValue": false
+                },
+                "balance": {
+                    "type": "string",
+                    "description": "余额",
+                    "allowEmptyValue": false
+                },
+                "email": {
+                    "type": "string",
+                    "description": "邮箱",
+                    "allowEmptyValue": false
+                },
+                "loginName": {
+                    "type": "string",
+                    "description": "登录名",
+                    "allowEmptyValue": false
+                },
+                "password": {
+                    "type": "string",
+                    "description": "密码",
+                    "allowEmptyValue": false
+                },
+                "phonenumber": {
+                    "type": "string",
+                    "description": "手机号",
+                    "allowEmptyValue": false
+                },
+                "remark": {
+                    "type": "string"
+                },
+                "sex": {
+                    "type": "string",
+                    "description": "性别",
+                    "allowEmptyValue": false
+                },
+                "userName": {
+                    "type": "string",
+                    "description": "用户名",
+                    "allowEmptyValue": false
+                },
+                "wechatName": {
+                    "type": "string",
+                    "description": "微信号",
+                    "allowEmptyValue": false
+                }
+            },
+            "title": "用户实体"
+        },
+        "返回参数": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "description": "数据",
+                    "allowEmptyValue": false
+                },
+                "meta": {
+                    "description": "元数据",
+                    "allowEmptyValue": false,
+                    "$ref": "#/definitions/Meta"
+                }
+            },
+            "title": "返回参数"
+        },
+        "返回参数«object»": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "description": "数据",
+                    "allowEmptyValue": false
+                },
+                "meta": {
+                    "description": "元数据",
+                    "allowEmptyValue": false,
+                    "$ref": "#/definitions/Meta"
+                }
+            },
+            "title": "返回参数«object»"
+        },
+        "返回参数«string»": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "description": "数据",
+                    "allowEmptyValue": false
+                },
+                "meta": {
+                    "description": "元数据",
+                    "allowEmptyValue": false,
+                    "$ref": "#/definitions/Meta"
+                }
+            },
+            "title": "返回参数«string»"
+        },
+        "返回参数«任务实体类TaskinfoVo»": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "object",
+                    "description": "数据",
+                    "allowEmptyValue": false
+                },
+                "meta": {
+                    "description": "元数据",
+                    "allowEmptyValue": false,
+                    "$ref": "#/definitions/Meta"
+                }
+            },
+            "title": "返回参数«任务实体类TaskinfoVo»"
+        },
+        "返回实体类TypeinfoVo": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "ID",
+                    "allowEmptyValue": false
+                },
+                "minNum": {
+                    "type": "string",
+                    "description": "最小数量",
+                    "allowEmptyValue": false
+                },
+                "minPrice": {
+                    "type": "number",
+                    "description": "最低金额",
+                    "allowEmptyValue": false
+                },
+                "pageNum": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "pageSize": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "rate": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "费率",
+                    "allowEmptyValue": false
+                },
+                "sortParam": {
+                    "type": "string",
+                    "description": "查询用：排序字段，降序排列，默认主键",
+                    "allowEmptyValue": false
+                },
+                "sortType": {
+                    "type": "string",
+                    "description": "查询用：排序方式，desc or asc，默认desc",
+                    "allowEmptyValue": false
+                },
+                "startRow": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "typeName": {
+                    "type": "string",
+                    "description": "类型名称",
+                    "allowEmptyValue": false
+                }
+            },
+            "title": "返回实体类TypeinfoVo"
+        },
+        "返回实体类UsertaskVo": {
+            "type": "object",
+            "properties": {
+                "createtime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "createtime",
+                    "allowEmptyValue": false
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "ID",
+                    "allowEmptyValue": false
+                },
+                "pageNum": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "pageSize": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "sortParam": {
+                    "type": "string",
+                    "description": "查询用：排序字段，降序排列，默认主键",
+                    "allowEmptyValue": false
+                },
+                "sortType": {
+                    "type": "string",
+                    "description": "查询用：排序方式，desc or asc，默认desc",
+                    "allowEmptyValue": false
+                },
+                "startRow": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "state": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "状态,-1：已领取，0：待审核，1：已审核。3：审核失败",
+                    "allowEmptyValue": false
+                },
+                "taskId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "任务id",
+                    "allowEmptyValue": false
+                },
+                "taskIssuer": {
+                    "type": "string",
+                    "description": "发布人",
+                    "allowEmptyValue": false
+                },
+                "taskTitle": {
+                    "type": "string",
+                    "description": "任务标题",
+                    "allowEmptyValue": false
+                },
+                "taskType": {
+                    "type": "string",
+                    "description": "任务类型",
+                    "allowEmptyValue": false
+                },
+                "taskprice": {
+                    "type": "number",
+                    "description": "taskprice",
+                    "allowEmptyValue": false
+                },
+                "userId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "用户id",
+                    "allowEmptyValue": false
+                },
+                "verifyimage": {
+                    "type": "string",
+                    "description": "验证图片url",
+                    "allowEmptyValue": false
+                },
+                "verifyliteral": {
+                    "type": "string",
+                    "description": "验证文字",
+                    "allowEmptyValue": false
+                }
+            },
+            "title": "返回实体类UsertaskVo"
+        },
+        "返回实体类WithdrawVo": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "number",
+                    "description": "申请金额",
+                    "allowEmptyValue": false
+                },
+                "creatTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "申请时间",
+                    "allowEmptyValue": false
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "ID",
+                    "allowEmptyValue": false
+                },
+                "pageNum": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "pageSize": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "sortParam": {
+                    "type": "string",
+                    "description": "查询用：排序字段，降序排列，默认主键",
+                    "allowEmptyValue": false
+                },
+                "sortType": {
+                    "type": "string",
+                    "description": "查询用：排序方式，desc or asc，默认desc",
+                    "allowEmptyValue": false
+                },
+                "startRow": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "state": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "状态。0：申请中，1提现成功，2提现失败",
+                    "allowEmptyValue": false
+                },
+                "updateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "更新时间",
+                    "allowEmptyValue": false
+                }
+            },
+            "title": "返回实体类WithdrawVo"
+        }
+    }
+}
