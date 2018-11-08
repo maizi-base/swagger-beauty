@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 
-import store from './store'
+import store from './store.js'
 Vue.use(Router)
 
 let router = new Router({
@@ -10,23 +10,18 @@ let router = new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: () => import('./views/Home.vue')
     },
     {
       path: '/details/:id',
       name: 'details',
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      component: () => import('./views/About.vue')
     }
   ]
 })
 router.beforeEach((to, from, next) => {
-  console.log('刷新', store.state.apiDoc)
-  if(!store.state.apiDoc){
-    store.dispatch('getApiDoc').then(res => {
-      next()
-    })
-  }else{
+  store.dispatch('getApiDoc').then(res => {
     next()
-  }
+  })
 })
 export default router

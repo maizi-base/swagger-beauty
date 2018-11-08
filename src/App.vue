@@ -14,8 +14,8 @@ export default {
   },
   created() {
     let that = this
-    this.$store.dispatch('getApiDoc').then(res => {
-    })
+    this.$store.commit('setUrl',localStorage.apiUrl)
+    this.$store.dispatch('getApiDoc')
   },
 }
 </script>
@@ -34,8 +34,11 @@ ul,li{
 #app{
   .main{
     // padding:0 200px;
+    position: relative;
     max-width: 900px;
     margin: 0 auto;
+    padding-top: 50px;
+    
   }
 }
 </style>

@@ -1,7 +1,9 @@
 <template>
   <div class="main home">
+    <button class="btn back-btn" @click="$router.back()">返回</button>
+    <button class="btn back-top-btn" @click="backTop">返回顶部</button>
     <h2>{{tag}}</h2>
-    <ul class="catalog-box">
+    <ul class="catalog-box right-menu">
       <li v-for="item,index in catalog">
         <a @click="goAnchor('anchor'+index)" href="javascript:void(0)">{{index+1}}.{{item.title}}</a>
       </li>
@@ -80,12 +82,13 @@ export default {
         if (that.paths[key1][key2]["tags"].indexOf(that.tag) > -1) {
           let obj = that.paths[key1][key2];
           let params = {
-            header: [],
-            query: [],
-            body: [],
-            path: []
+            // header: [],
+            // query: [],
+            // body: [],
+            // path: []
           };
           obj.parameters.forEach(v => {
+            if(!params[v.in]) params[v.in] = []
             if(v.schema&&v.schema.$ref){
               let arr = [];
               for(let proKey in v.schema.$ref.properties){
@@ -122,6 +125,9 @@ export default {
       var anchor = document.getElementById(selector);
       document.documentElement.scrollTop = anchor.offsetTop;
     },
+    backTop(){
+      document.documentElement.scrollTop = 0
+    },
     /**
      * 获取实体类
      */
@@ -150,9 +156,21 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.back-btn{
+  position: absolute;
+  right: 0
+}
+.back-top-btn{
+  position: fixed;
+  right: 10px;
+  bottom:10px;
+}
 .catalog-box {
   padding: 20px 0;
   border-bottom: 1px dotted #eee;
+}
+.right-menu{
+  position: fixed;
 }
 .api-info {
   .apiinfo-list {

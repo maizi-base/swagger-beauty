@@ -8,5 +8,8 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
+  created() {
+    // this.$store.commit('setUrl', localStorage.apiUrl)
+  },
   render: h => h(App)
 }).$mount('#app')
